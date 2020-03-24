@@ -49,7 +49,7 @@ func run(svc Service) error {
 	}
 
 	// Run subsequent batches every 15 seconds.
-	ticker := time.NewTicker(15 * time.Second)
+	ticker := time.NewTicker(5 * time.Second)
 	defer ticker.Stop()
 
 	for {
@@ -68,7 +68,13 @@ func runBatch(svc Service, ts time.Time) error {
 		if err != nil {
 			return fmt.Errorf("cannot get delivery dates for postal code (%v): %v", postalCode, err)
 		}
-		fmt.Printf("%+v", deliveryDates)
+
+		availSlots, err := ParseAvailableDeliverySlots(deliveryDates)
+		if err != nil {
+			return fmt.Errorf("cannot parse available delivery slots: %v", err)
+		}
+
+		log.Printf("[INFO]: Available slots (%v): %+v", postalCode, availSlots)
 
 		// TODO: Check/store database, send notifications.
 	}

@@ -12,12 +12,16 @@ var defaultBaseURL = "https://www.ah.nl/service/rest/delegate"
 
 // DeliveryTimeSlot represents an ah.nl delivery time slot.
 type DeliveryTimeSlot struct {
-	From  string  `json:"from"`
-	To    string  `json:"to"`
-	State string  `json:"state"`
-	Eco   bool    `json:"eco"`
-	BDP   float32 `json:"bdp"` // What does `bdp` mean?
-	DL    int     `json:"dl"`  // What does `dl` mean?
+	From    string  `json:"from"`
+	To      string  `json:"to"`
+	Value   float64 `json:"value"`
+	State   string  `json:"state"`
+	NavItem struct {
+		Link struct {
+			HRef string `json:"href"`
+		} `json:"link"`
+	} `json:"navItem"`
+	Eco bool `json:"eco"`
 }
 
 // DeliveryDate represents a delivery date (day) on ah.nl.

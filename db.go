@@ -16,6 +16,7 @@ type Database struct {
 type DeliverySlot struct {
 	From      time.Time
 	To        time.Time
+	HRef      string
 	Available bool
 }
 
