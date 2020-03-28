@@ -48,7 +48,7 @@ func run(svc Service) error {
 		log.Printf("[ERROR]: Could not run batch: %v", err)
 	}
 
-	// Run subsequent batches every 15 seconds.
+	// Run subsequent batches every 5 seconds.
 	ticker := time.NewTicker(5 * time.Second)
 	defer ticker.Stop()
 
